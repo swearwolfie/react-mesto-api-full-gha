@@ -144,7 +144,7 @@ module.exports.changeAvatar = (req, res) => {
     });
 };
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
@@ -161,12 +161,9 @@ module.exports.login = (req, res) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.send({ token }); // вернём токен
     })
-    .catch(() => {
-      res
-        .status(errorUnfound)
-        .send({ message: 'Переданы неккоректные данные' });
-    });
+    .catch(next);
 };
+
 
 // users/me
 module.exports.getCurrentUser = (req, res) => {

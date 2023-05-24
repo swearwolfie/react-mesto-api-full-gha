@@ -1,0 +1,5 @@
+.cards__likes-container {
+  display: flex;
+  flex-direction: column;
+  margin: 22px 0px;
+}

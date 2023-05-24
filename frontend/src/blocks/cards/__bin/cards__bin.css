@@ -1,0 +1,16 @@
+.cards__bin {
+  background-image: url(../../../images/bin.svg);
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0px;
+}
+
+.cards__bin:hover {
+  opacity: 0.6;
+}

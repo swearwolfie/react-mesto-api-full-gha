@@ -1,0 +1,21 @@
+.cards__item {
+  width: 282px;
+  min-height: 361px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media screen and (max-width: 910px) {
+  .cards__item {
+    width: 100%;
+    /*
+    max-height: 530px;*/
+  }
+}
+/*
+@media screen and (max-width: 325px) {
+  .cards__item {
+    max-height: 361px;
+  }
+}*/

@@ -1,0 +1,20 @@
+.cards__info {
+  width: 282px;
+  min-height: 79px;
+  padding: 0px 20px 0px 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+@media screen and (max-width: 910px) {
+  .cards__info {
+    width: 100%;
+  }
+}

@@ -1,0 +1,20 @@
+.profile__container {
+  max-width: 60%;
+  display: grid;
+  grid-template-columns: minmax(1%, 95%) min-content;
+  row-gap: 8px;
+  column-gap: 9px;
+}
+
+@media screen and (max-width: 900px) {
+  .profile__container {
+    width: 80%;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__container {
+    max-width: 70%;
+  }
+}

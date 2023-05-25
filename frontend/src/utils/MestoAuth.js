@@ -1,5 +1,5 @@
 
-  const basicURL = "http://swearwolfie.mesto.nomoredomains.monster/";
+  const basicURL = "http://api.swearwolfie.mesto.nomoredomains.rocks";
 
   // отдельная функция для общения с сервером
   function checkResponse(response) {

@@ -1,6 +1,6 @@
 class Api {
   constructor({ url, headers }) {
-    this._url = url; // https://mesto.nomoreparties.co/v1/cohort-54/
+    this._url = url; // https://api.swearwolfie.mesto.nomoredomains.rocks/
     this._headers = headers;
   }
 
@@ -85,7 +85,7 @@ class Api {
 // ↓  конфиг API
 
 const apiConfig = {
-  url: "http://api.swearwolfie.mesto.nomoredomains.rocks/",
+  url: "https://api.swearwolfie.mesto.nomoredomains.rocks/",
   headers: {
     authorization: "e005a204-1370-46e1-93c7-d7d1a162ac21",
     "Content-type": "application/json",

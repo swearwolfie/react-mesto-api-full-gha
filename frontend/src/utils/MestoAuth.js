@@ -1,5 +1,5 @@
 
-  const basicURL = "https://auth.nomoreparties.co";
+  const basicURL = "http://swearwolfie.mesto.nomoredomains.monster/";
 
   // отдельная функция для общения с сервером
   function checkResponse(response) {

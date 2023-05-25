@@ -87,7 +87,6 @@ class Api {
 const apiConfig = {
   url: "https://api.swearwolfie.mesto.nomoredomains.rocks/",
   headers: {
-    authorization: "e005a204-1370-46e1-93c7-d7d1a162ac21",
     "Content-type": "application/json",
   },
 };

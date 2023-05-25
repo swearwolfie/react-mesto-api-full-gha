@@ -30,7 +30,8 @@ const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
   'localhost:3000',
-  'http://swearwolfie.mesto.nomoredomains.monster',
+  'https://swearwolfie.mesto.nomoredomains.monster',
+  'https://swearwolfie.mesto.nomoredomains.monster'
 ];
 
 app.use((req, res, next) => {

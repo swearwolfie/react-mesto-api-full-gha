@@ -12,11 +12,11 @@ module.exports = (req, res, next) => {
       .send({ message: 'Необходима авторизация' });
   }
 
-  const token = authorization.replace('Bearer ', '');
+  const jwt = authorization.replace('Bearer ', '');
   let payload;
 
   try {
-    payload = jwt.verify(token, JWT_SECRET);
+    payload = jwt.verify(jwt, JWT_SECRET);
   } catch (err) {
     return res
       .status(AuthError)

@@ -158,8 +158,8 @@ module.exports.login = (req, res, next) => {
     }))
     .then((user) => {
       // создадим токен
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-      res.send({ token }); // вернём токен
+      const jwt = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      res.send({ jwt }); // вернём токен
     })
     .catch(next);
 };

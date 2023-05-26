@@ -168,7 +168,7 @@ function App() {
         if (data) {
           console.log(data, email, "успех апи");
           setProfileEmail(email);
-          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("jwt", data.jwt);
           setIsLoggedIn(true);
           navigate("/");
         }

@@ -1,6 +1,6 @@
 class Api {
   constructor({ url, headers }) {
-    this._url = url; // https://api.swearwolfie.mesto.nomoredomains.rocks/
+    this._url = url; // https://mesto.nomoreparties.co/v1/cohort-54/
     this._headers = headers;
   }
 
@@ -14,34 +14,22 @@ class Api {
   }
 
   getCards() {
-    const token = localStorage.getItem("token");
     return fetch(`${this._url}${"cards"}`, {
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
     }).then(this.checkResponse);
   }
 
   deleteCard(id) {
-    const token = localStorage.getItem("token");
     return fetch(`${this._url}${"cards/"}${id}`, {
       method: 'DELETE',
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
     }).then(this.checkResponse);
   }
 
   addNewCard(name, link) {
-    const token = localStorage.getItem("token");
     return fetch(`${this._url}${"cards"}`, {
       method: "POST",
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
       body: JSON.stringify({
         name,
         link,
@@ -50,23 +38,15 @@ class Api {
   }
 
   getProfileInfo() {
-    const token = localStorage.getItem("token");
     return fetch(`${this._url}${"users/me"}`, {
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
     }).then(this.checkResponse);
   }
 
   editProfile(name, about) {
-    const token = localStorage.getItem("token");
     return fetch(`${this._url}${"users/me"}`, {
       method: "PATCH",
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
       body: JSON.stringify({
         name,
         about,
@@ -75,34 +55,23 @@ class Api {
   }
 
   changeLikeCardStatus(id, isLiked) {
-    const token = localStorage.getItem("token");
     return fetch(`${this._url}${"cards/"}${id}${"/likes"}`, {
       method:`${isLiked ? 'PUT' : 'DELETE'}`,
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
     }).then(this.checkResponse);
   }
 /*
   putLike(id) {
     return fetch(`${this._url}${"cards/"}${id}${"/likes"}`, {
       method: "PUT",
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
     }).then(this.checkResponse);
   } */
 
   changeAvatar(avatar) {
-    const token = localStorage.getItem("token");
     return fetch(`${this._url}${"users/me/avatar"}`, {
       method: "PATCH",
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
+      headers: this._headers,
       body: JSON.stringify({
         avatar,
       }),
@@ -117,6 +86,10 @@ class Api {
 
 const apiConfig = {
   url: "https://api.swearwolfie.mesto.nomoredomains.rocks/",
+  headers: {
+    authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDcxMjE3Zjk5ZWQ0MmIzZDRmOTZiMmMiLCJpYXQiOjE2ODUxMzU3NjgsImV4cCI6MTY4NTc0MDU2OH0.KKRpIeK38g1X61G22HJgVEpPL5XbMslieXSeu7yGwwg",
+    "Content-type": "application/json",
+  },
 };
 
 const apiThingie = new Api(apiConfig);

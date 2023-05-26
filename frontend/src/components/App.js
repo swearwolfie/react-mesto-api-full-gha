@@ -80,6 +80,55 @@ function App() {
     setIsInfoToolOpen(false);
   }
 
+  function handleSignUp({ email, password }) {
+    register(email, password)
+      .then((data) => {
+        if (data) {
+          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
+          navigate("/signin");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => setIsInfoToolOpen(true)); // открываем один из попапов в зависимости от успехов
+  }
+
+  function handleSignIn({ email, password }) {
+    authorize(email, password)
+      .then((data) => {
+        if (data) {
+          console.log(data, email, "успех апи");
+          setProfileEmail(email);
+          localStorage.setItem("jwt", data.jwt);
+          setIsLoggedIn(true);
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  // проверка токена
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then((data) => {
+          if (data) {
+            setIsLoggedIn(true);
+            setProfileEmail(data.data.email);
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  });
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -147,55 +196,6 @@ function App() {
         console.log(error);
       });
   }
-
-  function handleSignUp({ email, password }) {
-    register(email, password)
-      .then((data) => {
-        if (data) {
-          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
-          navigate("/signin");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => setIsInfoToolOpen(true)); // открываем один из попапов в зависимости от успехов
-  }
-
-  function handleSignIn({ email, password }) {
-    authorize(email, password)
-      .then((data) => {
-        if (data) {
-          console.log(data, email, "успех апи");
-          setProfileEmail(email);
-          localStorage.setItem("jwt", data.jwt);
-          setIsLoggedIn(true);
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  // проверка токена
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(token)
-        .then((data) => {
-          if (data) {
-            setIsLoggedIn(true);
-            setProfileEmail(data.data.email);
-            navigate("/");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  });
 
   function handleSignOut() {
     localStorage.removeItem("jwt");

@@ -88,6 +88,7 @@ const apiConfig = {
   url: "https://api.swearwolfie.mesto.nomoredomains.rocks/",
   headers: {
     "Content-type": "application/json",
+    authorization: `Bearer ${token}`
   },
 };
 

@@ -36,6 +36,25 @@ function App() {
 
   const navigate = useNavigate();
 
+    // проверка токена
+
+    useEffect(() => {
+      const token = localStorage.getItem("jwt");
+      if (token) {
+        checkToken(token)
+          .then((data) => {
+            if (data) {
+              setIsLoggedIn(true);
+              setProfileEmail(data.data.email);
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+
   useEffect(() => {
     apiThingie
       .getCards() // result - готовые данные
@@ -109,25 +128,6 @@ function App() {
         console.log(error);
       });
   }
-
-  // проверка токена
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(token)
-        .then((data) => {
-          if (data) {
-            setIsLoggedIn(true);
-            setProfileEmail(data.data.email);
-            navigate("/");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  });
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке

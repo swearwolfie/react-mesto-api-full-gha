@@ -36,26 +36,9 @@ function App() {
 
   const navigate = useNavigate();
 
-    // проверка токена
-
-    useEffect(() => {
-      const token = localStorage.getItem("jwt");
-      if (token) {
-        checkToken(token)
-          .then((data) => {
-            if (data) {
-              setIsLoggedIn(true);
-              setProfileEmail(data.data.email);
-              navigate("/");
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    });
-
-  useEffect(() => {
+  /* useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
     apiThingie
       .getCards() // result - готовые данные
       .then((cards) => {
@@ -63,10 +46,13 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-      });
-  }, []);
+  })
+  }
+  }, [isLoggedIn]);
 
   useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
     apiThingie
       .getProfileInfo()
       .then((profileUserInfo) => {
@@ -75,7 +61,21 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+    }
+  }, [isLoggedIn]); */
+
+  // получаем массив карточек и инфу пользователя
+  React.useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+    Promise.all([apiThingie.getProfileInfo(), apiThingie.getCards()])
+      .then(([user, cards]) => {
+        setCurrentUser(user);
+        setUploadedCards(cards);
+      })
+      .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -196,6 +196,25 @@ function App() {
         console.log(error);
       });
   }
+
+      // проверка токена
+
+      useEffect(() => {
+        const jwt = localStorage.getItem("jwt");
+        if (jwt) {
+          checkToken(token)
+            .then((data) => {
+              if (data) {
+                setIsLoggedIn(true);
+                setProfileEmail(data.data.email);
+                navigate("/");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      });
 
   function handleSignOut() {
     localStorage.removeItem("jwt");

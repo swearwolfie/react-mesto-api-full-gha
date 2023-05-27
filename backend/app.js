@@ -7,7 +7,7 @@ const { celebrate, Joi, errors } = require('celebrate'); // библиотека
 const {
   errorUnfound,
 } = require('./utils/constants');
-const { createUser, login } = require('./controllers/users');
+const { createUser, authorize } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { DB_ADDRESS } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -79,7 +79,7 @@ app.post('/signin', celebrate({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
-}), login);
+}), authorize);
 
 // авторизация
 app.use(auth);

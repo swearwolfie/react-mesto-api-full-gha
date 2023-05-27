@@ -144,7 +144,7 @@ module.exports.changeAvatar = (req, res) => {
     });
 };
 
-module.exports.login = (req, res, next) => {
+module.exports.authorize = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме

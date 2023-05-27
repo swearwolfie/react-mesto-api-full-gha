@@ -209,17 +209,7 @@ function App() {
         <Header userEmail={profileEmail} onSignOut={handleSignOut} />
         {/* шапка */}
         <Routes>
-          <Route
-            path="/signup"
-            element={
-              <>
-                <Register onSignUp={handleSignUp} />
-              </>
-            }
-          />
-          <Route path="/signin" element={<Login onSignIn={handleSignIn} />} />
-
-          <Route
+        <Route
             exact
             path="/"
             element={<ProtectedRoute isLoggedIn={isLoggedIn} />}
@@ -243,6 +233,16 @@ function App() {
               }
             />
           </Route>
+          <Route
+            path="/signup"
+            element={
+              <>
+                <Register onSignUp={handleSignUp} />
+              </>
+            }
+          />
+          <Route path="/signin" element={<Login onSignIn={handleSignIn} />} />
+
         </Routes>
         <InfoTooltip
           isOpen={isInfoToolOpen}

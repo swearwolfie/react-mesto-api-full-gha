@@ -9,9 +9,12 @@ const {
 } = require('../utils/constants');
 // code - 400, default - 500, unfound - 404
 // 200 - успех, 201 – успех и что-то создалось
+const NotFoundError = require('../errors/not-found-err');
+const ConflictError = require('../errors/confl-err');
+const BadRequestError = require('../errors/bad-req-err');
 const { JWT_SECRET } = require('../config');
 
-module.exports.createUser = (req, res) => {
+module.exports.createUser = (req, res, next) => {
   const
     {
       name,
@@ -31,14 +34,11 @@ module.exports.createUser = (req, res) => {
     .then((user) => res.status(created).send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return res
-          .status(errorCode)
-          .send({ message: 'Переданы некорректные данные при создании user' });
-      } if (err.code === 11000) {
-        return res.status(errorDouble)
-          .send({ message: 'Такой пользователь уже существует' });
-      }
-      return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
+        next(new BadRequestError('Переданы некорректные данные'))
+      } else if (err.code === 11000) {
+        next(new ConflictError('Такой пользователь уже существует'))
+      } else next(err);
+      // return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
     });
 };
 

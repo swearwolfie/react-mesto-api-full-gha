@@ -149,12 +149,12 @@ module.exports.authorize = (req, res, next) => {
 
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
     .orFail(() => {
-      throw new NotFoundError('Пользовать не найден')
+      next(NotFoundError('Пользовать не найден'))
     })
     .then((user) => bcrypt.compare(password, user.password).then((matched) => {
       if (matched) {
         return user;
-      } throw new NotFoundError('Пользовать не найден'); // ошибка на несовпадение пароля
+      } next(NotFoundError('Пользовать не найден')); // ошибка на несовпадение пароля
     }))
     .then((user) => {
       // создадим токен

@@ -36,7 +36,7 @@ module.exports.createUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные'))
       } else if (err.code === 11000) {
-        next(new ConflictError('Такой пользователь уже существует'))
+        next(new ConflictError('Такой пользователь уже существует амиго'))
       } else next(err);
       // return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
     });

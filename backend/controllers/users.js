@@ -34,9 +34,9 @@ module.exports.createUser = (req, res, next) => {
     .then((user) => res.status(created).send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные'))
+        throw new BadRequestError('Переданы некорректные данные')
       } else if (err.code === 11000) {
-        next(new ConflictError('Такой пользователь уже существует амиго'))
+        throw new ConflictError('Такой пользователь уже существует, амиго')
       } else next(err);
       // return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
     });
@@ -148,13 +148,13 @@ module.exports.authorize = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
-    .orFail(() => res // метод для обработки ошибок FindBy... etc
-      .status(errorUnfound)
-      .send({ message: 'Пользователь не найден' })) // ошибка на ненайденный пароль
+    .orFail(() => {
+      throw new NotFoundError('Пользовать не найден')
+    })
     .then((user) => bcrypt.compare(password, user.password).then((matched) => {
       if (matched) {
         return user;
-      } return res.status(errorUnfound).send({ message: 'Пользователь не найден' }); // ошибка на несовпадение пароля
+      } throw new NotFoundError('Пользовать не найден'); // ошибка на несовпадение пароля
     }))
     .then((user) => {
       // создадим токен

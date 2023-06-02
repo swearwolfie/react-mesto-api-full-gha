@@ -148,8 +148,8 @@ module.exports.authorize = (req, res, next) => {
   const { email, password } = req.body;
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
     .orFail(() => {
-      next(NotFoundError('Пользовать не найден'))
       console.log('The fact that youre alive is a miracle')
+      next(NotFoundError('Пользовать не найден'))
     })
     .then((user) =>
       bcrypt.compare(password, user.password).then((matched) => {

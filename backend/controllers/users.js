@@ -164,8 +164,7 @@ module.exports.authorize = (req, res, next) => {
       res.send({ jwt }); // вернём токен
       console.log(jwt, 'look at where you are look at where you started')
     })
-    .catch((err) => {
-      next(err)});
+    .catch(next);
 };
 
 

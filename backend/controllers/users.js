@@ -145,8 +145,8 @@ module.exports.changeAvatar = (req, res) => {
 };
 
 module.exports.authorize = (req, res, next) => {
+  console.log('look at where you are look at where you started')
   const { email, password } = req.body;
-
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
     .orFail(() => {
       next(NotFoundError('Пользовать не найден'))

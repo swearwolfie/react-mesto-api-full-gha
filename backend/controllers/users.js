@@ -150,6 +150,7 @@ module.exports.authorize = (req, res, next) => {
   console.log(req.body, 'the fact that youre alive is a miracle')
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
     .orFail(() => {
+      console.log('look around look around')
       next(NotFoundError('Пользовать не найден'))
     })
     .then((user) =>

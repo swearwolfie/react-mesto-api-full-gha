@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs'); // импортируем bcrypt для хэширования паролей
-const jwt = require('jsonwebtoken'); // импортируем модуль jsonwebtoken для создания токена
+const token = require('jsonwebtoken'); // импортируем модуль jsonwebtoken для создания токена
 const User = require('../models/user');
 /*
 const { celebrate, Joi } = require('celebrate'); библиотека для валидации данных
@@ -162,7 +162,7 @@ module.exports.authorize = (req, res, next) => {
     }))
     .then((user) => {
       // создадим токен
-      const jwt = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      const jwt = token.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.send({ jwt }); // вернём токен
       console.log(jwt, 'look at where you are look at where you started')
     })

@@ -126,7 +126,8 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .finally(() => setIsInfoToolOpen(true));
   }
 
   function handleCardLike(card) {

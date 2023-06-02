@@ -145,7 +145,6 @@ module.exports.changeAvatar = (req, res) => {
 };
 
 module.exports.authorize = (req, res, next) => {
-  console.log('look at where you are look at where you started')
   const { email, password } = req.body;
   console.log(req.body, 'the fact that youre alive is a miracle')
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
@@ -165,6 +164,7 @@ module.exports.authorize = (req, res, next) => {
       // создадим токен
       const jwt = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.send({ jwt }); // вернём токен
+      console.log(jwt, 'look at where you are look at where you started')
     })
     .catch((err) => {
       console.log('that would be enough')

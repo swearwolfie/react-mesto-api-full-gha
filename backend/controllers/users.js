@@ -146,15 +146,12 @@ module.exports.changeAvatar = (req, res) => {
 
 module.exports.authorize = (req, res, next) => {
   const { email, password } = req.body;
-  console.log(req.body, 'the fact that youre alive is a miracle')
   User.findOne({ email }).select('+password') // дополнение для оверрайда select'а в схеме
     .orFail(() => {
-      console.log('look around look around')
       next(NotFoundError('Пользовать не найден'))
     })
     .then((user) =>
       bcrypt.compare(password, user.password).then((matched) => {
-        console.log('just stay alive')
       if (matched) {
         console.log(user, 'at how lucky we are to be alive right now')
         return user;
@@ -167,7 +164,6 @@ module.exports.authorize = (req, res, next) => {
       console.log(jwt, 'look at where you are look at where you started')
     })
     .catch((err) => {
-      console.log('that would be enough')
       next(err)});
 };
 

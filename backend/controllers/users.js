@@ -157,6 +157,7 @@ module.exports.authorize = (req, res, next) => {
       bcrypt.compare(password, user.password).then((matched) => {
         console.log('just stay alive')
       if (matched) {
+        console.log(user, 'at how lucky we are to be alive right now')
         return user;
       } next(NotFoundError('Пользовать не найден')); // ошибка на несовпадение пароля
     }))

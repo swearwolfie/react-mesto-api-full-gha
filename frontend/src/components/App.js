@@ -65,7 +65,7 @@ function App() {
   }, [isLoggedIn]); */
 
   // получаем массив карточек и инфу пользователя
-  React.useEffect(() => {
+  useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
     Promise.all([apiThingie.getProfileInfo(), apiThingie.getCards()])
@@ -230,6 +230,7 @@ function App() {
         <Header userEmail={profileEmail} onSignOut={handleSignOut} />
         {/* шапка */}
         <Routes>
+          {/*
         <Route
             exact
             path="/"
@@ -253,7 +254,26 @@ function App() {
                 </>
               }
             />
-          </Route>
+          </Route> */}
+         {/* начало */}
+         <Route
+            exact
+            path="/"
+            element={
+            <ProtectedRoute 
+            isLoggedIn={isLoggedIn} 
+            Component={Main}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            cardSet={uploadedCards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
+          }
+          />
+         {/* конец + футер */}
           <Route
             path="/signup"
             element={
@@ -265,6 +285,7 @@ function App() {
           <Route path="/signin" element={<Login onSignIn={handleSignIn} />} />
 
         </Routes>
+        <Footer />
         <InfoTooltip
           isOpen={isInfoToolOpen}
           onClose={closeAllPopups}

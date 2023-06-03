@@ -203,6 +203,7 @@ function App() {
       useEffect(() => {
         const jwt = localStorage.getItem("jwt");
         if (jwt) {
+          console.log(jwt, 'i hear the walls repeating')
           checkToken(jwt)
             .then((data) => {
               if (data) {

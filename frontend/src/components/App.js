@@ -230,7 +230,6 @@ function App() {
         <Header userEmail={profileEmail} onSignOut={handleSignOut} />
         {/* шапка */}
         <Routes>
-          {/*
         <Route
             exact
             path="/"
@@ -254,8 +253,8 @@ function App() {
                 </>
               }
             />
-          </Route> */}
-         {/* начало */}
+          </Route> 
+         {/* начало 
          <Route
             exact
             path="/"
@@ -273,7 +272,7 @@ function App() {
           />
           }
           />
-         {/* конец + футер */}
+          конец + футер */}
           <Route
             path="/signup"
             element={
@@ -285,7 +284,6 @@ function App() {
           <Route path="/signin" element={<Login onSignIn={handleSignIn} />} />
 
         </Routes>
-        <Footer />
         <InfoTooltip
           isOpen={isInfoToolOpen}
           onClose={closeAllPopups}

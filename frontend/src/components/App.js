@@ -36,12 +36,14 @@ function App() {
 
   const navigate = useNavigate();
 
-  /* useEffect(() => {
+  useEffect(() => {
     const jwt = localStorage.getItem("jwt");
+    console.log(jwt, 'hola')
     if (jwt) {
     apiThingie
       .getCards() // result - готовые данные
       .then((cards) => {
+        console.log(cards, 'buen dia')
         setUploadedCards(cards);
       })
       .catch((error) => {
@@ -56,15 +58,17 @@ function App() {
     apiThingie
       .getProfileInfo()
       .then((profileUserInfo) => {
+        console.log(profileUserInfo, 'salut')
         setCurrentUser(profileUserInfo);
       })
       .catch((error) => {
         console.log(error);
       });
     }
-  }, [isLoggedIn]); */
+  }, [isLoggedIn]);
 
   // получаем массив карточек и инфу пользователя
+  /*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -76,7 +80,7 @@ function App() {
       })
       .catch((err) => console.log(err));
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn]); */
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);

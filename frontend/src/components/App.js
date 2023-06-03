@@ -235,7 +235,17 @@ function App() {
         <Header userEmail={profileEmail} onSignOut={handleSignOut} />
         {/* шапка */}
         <Routes>
-        <Route
+          <Route
+            path="/signup"
+            element={
+              <>
+                <Register onSignUp={handleSignUp} />
+              </>
+            }
+          />
+          <Route path="/signin" element={<Login onSignIn={handleSignIn} />} />
+
+          <Route
             exact
             path="/"
             element={<ProtectedRoute isLoggedIn={isLoggedIn} />}
@@ -258,36 +268,7 @@ function App() {
                 </>
               }
             />
-          </Route> 
-         {/* начало 
-         <Route
-            exact
-            path="/"
-            element={
-            <ProtectedRoute 
-            isLoggedIn={isLoggedIn} 
-            Component={Main}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            cardSet={uploadedCards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-          />
-          }
-          />
-          конец + футер */}
-          <Route
-            path="/signup"
-            element={
-              <>
-                <Register onSignUp={handleSignUp} />
-              </>
-            }
-          />
-          <Route path="/signin" element={<Login onSignIn={handleSignIn} />} />
-
+          </Route>
         </Routes>
         <InfoTooltip
           isOpen={isInfoToolOpen}

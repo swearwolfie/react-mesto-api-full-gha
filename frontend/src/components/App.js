@@ -36,36 +36,62 @@ function App() {
 
   const navigate = useNavigate();
 
+  // проверка токена
+
+  useEffect(() => {
+    if (jwt) {
+      console.log(jwt, "i hear the walls repeating");
+      checkToken(jwt)
+        .then((data) => {
+          apiThingie.getToken(jwt);
+            setProfileEmail(data.data.email);
+            setIsLoggedIn(true);
+            setCurrentUser(profileUserInfo);
+            navigate("/");
+        })
+        .catch((error) => console.log(error));
+
+        apiThingie.getCards({authorization: `Bearer ${jwt}`})
+        .then((res) => {
+          setCards(res.reverse());
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [jwt]) 
+  
+  /*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    console.log(jwt, 'hola')
+    console.log(jwt, "hola");
     if (jwt) {
-    apiThingie
-      .getCards() // result - готовые данные
-      .then((cards) => {
-        console.log(cards, 'buen dia')
-        setUploadedCards(cards);
-      })
-      .catch((error) => {
-        console.log(error);
-  })
-  }
+      apiThingie
+        .getCards() // result - готовые данные
+        .then((cards) => {
+          console.log(cards, "buen dia");
+          setUploadedCards(cards);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [isLoggedIn]);
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-    apiThingie
-      .getProfileInfo()
-      .then((profileUserInfo) => {
-        console.log(profileUserInfo, 'salut')
-        setCurrentUser(profileUserInfo);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      apiThingie
+        .getProfileInfo()
+        .then((profileUserInfo) => {
+          console.log(profileUserInfo, "salut");
+          setCurrentUser(profileUserInfo);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn]); */
+  
+  // 
 
   // получаем массив карточек и инфу пользователя
   /*
@@ -202,26 +228,6 @@ function App() {
         console.log(error);
       });
   }
-
-      // проверка токена
-
-      useEffect(() => {
-        const jwt = localStorage.getItem("jwt");
-        if (jwt) {
-          console.log(jwt, 'i hear the walls repeating')
-          checkToken(jwt)
-            .then((data) => {
-              if (data) {
-                setIsLoggedIn(true);
-                setProfileEmail(data.data.email);
-                navigate("/");
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      });
 
   function handleSignOut() {
     localStorage.removeItem("jwt");

@@ -39,27 +39,23 @@ function App() {
   // проверка токена
 
   useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
       console.log(jwt, "i hear the walls repeating");
       checkToken(jwt)
         .then((data) => {
-          apiThingie.getToken(jwt);
-            setProfileEmail(data.data.email);
+          if (data) {
             setIsLoggedIn(true);
-            setCurrentUser(profileUserInfo);
+            setProfileEmail(data.data.email);
             navigate("/");
+          }
         })
-        .catch((error) => console.log(error));
-
-        apiThingie.getCards({authorization: `Bearer ${jwt}`})
-        .then((res) => {
-          setCards(res.reverse());
-        })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, [jwt]) 
-  
-  /*
+  });
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     console.log(jwt, "hola");
@@ -89,9 +85,7 @@ function App() {
           console.log(error);
         });
     }
-  }, [isLoggedIn]); */
-  
-  // 
+  }, [isLoggedIn]);
 
   // получаем массив карточек и инфу пользователя
   /*

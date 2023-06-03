@@ -17,26 +17,35 @@ class Api {
     }
   }
 
-  getCards(headers = this._headers) {
-  //  const token = localStorage.getItem("jwt");
+  getCards() {
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"cards"}`, {
-      headers: headers,
+      headers: {
+    "Content-type": "application/json",
+    authorization: `Bearer ${token}`
+  },
     }).then(this.checkResponse);
   }
 
   deleteCard(id) {
-  //  const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"cards/"}${id}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+    "Content-type": "application/json",
+    authorization: `Bearer ${token}`
+  },
     }).then(this.checkResponse);
   }
 
   addNewCard(name, link) {
-  //  const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"cards"}`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+    "Content-type": "application/json",
+    authorization: `Bearer ${token}`
+  },
       body: JSON.stringify({
         name,
         link,
@@ -45,18 +54,24 @@ class Api {
   }
 
   getProfileInfo() {
-  //  const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     console.log(token, 'the falling of your feet')
     return fetch(`${this._url}${"users/me"}`, {
-      headers: this._headers,
+      headers: {
+    "Content-type": "application/json",
+    authorization: `Bearer ${token}`
+  },
     }).then(this.checkResponse);
   }
 
   editProfile(name, about) {
-  //  const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"users/me"}`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+    "Content-type": "application/json",
+    authorization: `Bearer ${token}`
+  },
       body: JSON.stringify({
         name,
         about,
@@ -65,10 +80,13 @@ class Api {
   }
 
   changeLikeCardStatus(id, isLiked) {
-  //  const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"cards/"}${id}${"/likes"}`, {
       method:`${isLiked ? 'PUT' : 'DELETE'}`,
-      headers: this._headers,
+      headers: {
+    "Content-type": "application/json",
+    authorization: `Bearer ${token}`
+  },
     }).then(this.checkResponse);
   }
 /*
@@ -83,10 +101,13 @@ class Api {
   } */
 
   changeAvatar(avatar) {
-  //  const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"users/me/avatar"}`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+    "Content-type": "application/json",
+    authorization: `Bearer ${token}`
+  },
       body: JSON.stringify({
         avatar,
       }),
@@ -101,9 +122,6 @@ class Api {
 
 const apiConfig = {
   url: "https://api.swearwolfie.mesto.nomoredomains.rocks/",
-  headers: {
-    "Content-type": "application/json",
-  },
 };
 
 const apiThingie = new Api(apiConfig);

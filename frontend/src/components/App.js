@@ -200,6 +200,7 @@ function App() {
     apiThingie
       .changeAvatar(avatar)
       .then((updateInfo) => {
+        console.log(updateInfo, 'if i could breathe id be free')
         setCurrentUser(updateInfo);
         closeAllPopups();
       })

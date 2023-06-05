@@ -41,7 +41,6 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      console.log(jwt, "i hear the walls repeating");
       checkToken(jwt)
         .then((data) => {
           if (data) {
@@ -58,12 +57,10 @@ function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    console.log(jwt, "hola");
     if (jwt) {
       apiThingie
         .getCards() // result - готовые данные
         .then((cards) => {
-          console.log(cards, "buen dia");
           setUploadedCards(cards.data);
         })
         .catch((error) => {
@@ -79,7 +76,7 @@ function App() {
         .getProfileInfo()
         .then((profileUserInfo) => {
           console.log(profileUserInfo, "salut");
-          setCurrentUser(profileUserInfo);
+          setCurrentUser(profileUserInfo.data);
         })
         .catch((error) => {
           console.log(error);

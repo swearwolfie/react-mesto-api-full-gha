@@ -39,7 +39,6 @@
   }
 
   export const checkToken = (token) => {
-    console.log(token, 'im coming wait for me')
     return fetch(`${basicURL}/users/me`, {
       method: "GET",
       headers: {

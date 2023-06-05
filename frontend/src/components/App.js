@@ -188,6 +188,7 @@ function App() {
     apiThingie
       .editProfile(name, about)
       .then((updateInfo) => {
+        console.log(updateInfo, 'id could turn water into wine')
         setCurrentUser(updateInfo);
         closeAllPopups();
       })

@@ -35,27 +35,7 @@ function App() {
   const [profileEmail, setProfileEmail] = useState("");
 
   const navigate = useNavigate();
-
-  // проверка токена
-    /*
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkToken(jwt)
-        .then((data) => {
-          if (data) {
-            setIsLoggedIn(true);
-            setProfileEmail(data.data.email);
-            navigate("/");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  });
-  
+       
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -83,10 +63,10 @@ function App() {
           console.log(error);
         });
     }
-  }, [isLoggedIn]);  */
+  }, [isLoggedIn]);  
 
   // получаем массив карточек и инфу пользователя
-
+/*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -98,7 +78,7 @@ function App() {
       })
       .catch((err) => console.log(err));
     }
-  }, [isLoggedIn]);   /**/
+  }, [isLoggedIn]); */
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -148,11 +128,31 @@ function App() {
         }
       })
       .catch((error) => {
+        setIsInfoToolOpen(false);
+        setIsStatusSuccess(true);
         console.log(error);
-        setIsStatusSuccess(false);
-        setIsInfoToolOpen(true);
       });
   }
+
+    // проверка токена
+
+
+    useEffect(() => {
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        checkToken(jwt)
+          .then((data) => {
+            if (data) {
+              setIsLoggedIn(true);
+              setProfileEmail(data.data.email);
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке

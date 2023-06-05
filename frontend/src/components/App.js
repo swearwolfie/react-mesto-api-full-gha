@@ -73,7 +73,7 @@ function App() {
     if (jwt) {
     Promise.all([apiThingie.getProfileInfo(), apiThingie.getCards()])
       .then(([user, cards]) => {
-        console.log(user.data, cards.data, 'i dont pretend to know the challenges were facing')
+        console.log(user, cards, 'i dont pretend to know the challenges were facing')
         setCurrentUser(user);
         setUploadedCards(cards);
       })

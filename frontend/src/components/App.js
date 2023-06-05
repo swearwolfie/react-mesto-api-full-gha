@@ -64,7 +64,7 @@ function App() {
         .getCards() // result - готовые данные
         .then((cards) => {
           console.log(cards, "buen dia");
-          setUploadedCards(cards);
+          setUploadedCards(cards.data);
         })
         .catch((error) => {
           console.log(error);

@@ -35,7 +35,8 @@ function App() {
   const [profileEmail, setProfileEmail] = useState("");
 
   const navigate = useNavigate();
-       
+     
+  /*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -63,22 +64,22 @@ function App() {
           console.log(error);
         });
     }
-  }, [isLoggedIn]);  
+  }, [isLoggedIn]);  */
 
   // получаем массив карточек и инфу пользователя
-/*
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
     Promise.all([apiThingie.getProfileInfo(), apiThingie.getCards()])
       .then(([user, cards]) => {
-        console.log(user, cards, 'i dont pretend to know the challenges were facing')
+        console.log(user.data, cards.data, 'i dont pretend to know the challenges were facing')
         setCurrentUser(user);
         setUploadedCards(cards);
       })
       .catch((err) => console.log(err));
     }
-  }, [isLoggedIn]); */
+  }, [isLoggedIn]); /**/
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -128,8 +129,8 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsInfoToolOpen(false);
-        setIsStatusSuccess(true);
+        setIsStatusSuccess(false);
+        setIsInfoToolOpen(true);
         console.log(error);
       });
   }

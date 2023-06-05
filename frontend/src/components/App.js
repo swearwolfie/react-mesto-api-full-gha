@@ -224,9 +224,9 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem("jwt");
     setIsLoggedIn(false);
-    navigate("/signin");
+    localStorage.removeItem("jwt");
+    setProfileEmail('');
   }
 
   return (

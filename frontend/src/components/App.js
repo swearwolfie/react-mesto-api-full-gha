@@ -37,6 +37,7 @@ function App() {
   const navigate = useNavigate();
 
   // проверка токена
+    /*
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
@@ -54,7 +55,7 @@ function App() {
         });
     }
   });
-
+  
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -82,10 +83,10 @@ function App() {
           console.log(error);
         });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn]);  */
 
   // получаем массив карточек и инфу пользователя
-  /*
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -97,7 +98,7 @@ function App() {
       })
       .catch((err) => console.log(err));
     }
-  }, [isLoggedIn]); */
+  }, [isLoggedIn]);   /**/
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);

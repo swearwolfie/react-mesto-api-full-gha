@@ -148,8 +148,8 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => setIsInfoToolOpen(true));
+        setIsStatusSuccess(false);
+      });
   }
 
   function handleCardLike(card) {

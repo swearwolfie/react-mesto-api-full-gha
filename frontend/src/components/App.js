@@ -35,39 +35,76 @@ function App() {
   const [profileEmail, setProfileEmail] = useState("");
 
   const navigate = useNavigate();
-     
-  
+
+  // проверка токена
+  /*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      apiThingie
-        .getCards() // result - готовые данные
-        .then((cards) => {
-          setUploadedCards(cards.data);
+      checkToken(jwt)
+        .then((data) => {
+          if (data) {
+            setIsLoggedIn(true);
+            setProfileEmail(data.data.email);
+            navigate("/");
+          }
         })
         .catch((error) => {
           console.log(error);
         });
+    }
+  }); */
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      checkToken(jwt)
+      .then((data) => {
+        if (data) {
+          setIsLoggedIn(true);
+          setProfileEmail(data.data.email);
+          apiThingie
+          .getProfileInfo()
+          .then((profileUserInfo) => {
+            console.log(profileUserInfo, "salut");
+            setCurrentUser(profileUserInfo.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      apiThingie
-        .getProfileInfo()
-        .then((profileUserInfo) => {
-          console.log(profileUserInfo, "salut");
-          setCurrentUser(profileUserInfo.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      checkToken(jwt)
+      .then((data) => {
+        if (data) {
+          apiThingie
+          .getCards() // result - готовые данные
+          .then((cards) => {
+            setUploadedCards(cards.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     }
-  }, [isLoggedIn]); 
+  }, [isLoggedIn]);
 
   // получаем массив карточек и инфу пользователя
-/*
+  /*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -135,26 +172,6 @@ function App() {
       });
   }
 
-    // проверка токена
-
-
-    useEffect(() => {
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        checkToken(jwt)
-          .then((data) => {
-            if (data) {
-              setIsLoggedIn(true);
-              setProfileEmail(data.data.email);
-              navigate("/");
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    });
-
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -191,7 +208,7 @@ function App() {
     apiThingie
       .editProfile(name, about)
       .then((updateInfo) => {
-        console.log(updateInfo, 'id could turn water into wine')
+        console.log(updateInfo, "id could turn water into wine");
         setCurrentUser(updateInfo);
         closeAllPopups();
       })
@@ -204,7 +221,7 @@ function App() {
     apiThingie
       .changeAvatar(avatar)
       .then((updateInfo) => {
-        console.log(updateInfo, 'if i could breathe id be free')
+        console.log(updateInfo, "if i could breathe id be free");
         setCurrentUser(updateInfo);
         closeAllPopups();
       })
@@ -228,7 +245,7 @@ function App() {
   function handleSignOut() {
     setIsLoggedIn(false);
     localStorage.removeItem("jwt");
-    setProfileEmail('');
+    setProfileEmail("");
   }
 
   return (
@@ -237,7 +254,6 @@ function App() {
         <Header userEmail={profileEmail} onSignOut={handleSignOut} />
         {/* шапка */}
         <Routes>
-
           <Route
             exact
             path="/"

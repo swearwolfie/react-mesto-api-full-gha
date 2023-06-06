@@ -100,7 +100,7 @@ class Api {
     }).then(this.checkResponse);
   } */
 
-  changeAvatar(avatar) {
+  changeAvatar({ avatar }) {
     const token = localStorage.getItem("jwt");
     console.log(avatar, 'we all scream for ice cream')
     return fetch(`${this._url}${"users/me/avatar"}`, {
@@ -109,7 +109,7 @@ class Api {
     "Content-type": "application/json",
     authorization: `Bearer ${token}`
   },
-      body: JSON.stringify(avatar),
+      body: JSON.stringify({ avatar }),
     }).then(this.checkResponse);
   }
 

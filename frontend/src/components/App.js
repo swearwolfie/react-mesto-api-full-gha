@@ -235,7 +235,7 @@ function App() {
   {
     /* сначала через вызов апи задаем информацию на сервере, потом задаем ее на самом сайте;  */
   }
-  function handleUpdateUser({ name, about }) {
+  function handleUpdateUser(name, about) {
     apiThingie
       .editProfile(name, about)
       .then((updateInfo) => {

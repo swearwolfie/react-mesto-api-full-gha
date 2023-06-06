@@ -17,10 +17,14 @@ router.patch('/me', celebrate({
     about: Joi.string().min(2).max(30),
   }),
 }), changeUser);
-router.patch('/me/avatar', /* celebrate({
+router.patch('/me/avatar', la(), /* celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().regex(/^(https?:\/\/(www\.)?([a-zA-z0-9-]){1,}\.?([a-zA-z0-9]){2,8}(\/?([a-zA-z0-9-])*\/?)*\/?([-._~:/?#[]@!\$&'\(\)\*\+,;=])*)/).required,
   }),
 }), */ changeAvatar);
 
 module.exports = router;
+
+function la() {
+  return console.log('HEY YOU OUT THERE IN THE COLD GETTIN LONELY GETTIG OLD')
+}

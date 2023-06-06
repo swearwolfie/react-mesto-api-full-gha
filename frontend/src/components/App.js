@@ -85,7 +85,7 @@ function App() {
     }
   }, [isLoggedIn]); */
 
-  
+  const jwt = localStorage.getItem("jwt");
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -240,7 +240,7 @@ function App() {
       .editProfile(name, about)
       .then((updateInfo) => {
         console.log(updateInfo, "id could turn water into wine");
-        setCurrentUser(updateInfo);
+        setCurrentUser(updateInfo.name, update.about);
         closeAllPopups();
       })
       .catch((error) => {

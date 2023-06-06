@@ -81,7 +81,7 @@ module.exports.getUsers = (req, res) => {
     .catch(() => res.status(errorDefault).send({ message: 'На сервере произошла ошибка' }));
 };
 
-module.exports.changeUser = (req, res) => {
+module.exports.changeUser = (req, res, next) => {
   User.findByIdAndUpdate(
     req.user._id,
     {
@@ -95,25 +95,20 @@ module.exports.changeUser = (req, res) => {
   )
     .then((user) => {
       if (user === null) {
-        return res
-          .status(errorUnfound)
-          .send({ message: 'Пользователь по указанному _id не найден.' });
+        next(NotFoundError('Пользовать не найден'))
       }
       return res.status(success).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return res
-          .status(errorCode)
-          .send({
-            message: 'Переданы некорректные данные для обновления профиля',
-          });
+        next(new BadRequestError('Переданы некорректные данные для обновления профиля'))
       }
-      return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
+      else next(err);
     });
 };
 
-module.exports.changeAvatar = (req, res) => {
+module.exports.changeAvatar = (req, res, next) => {
+  console.log(req.body, 'im still standing better than i ever did')
   User.findByIdAndUpdate(
     req.user._id,
     {
@@ -126,21 +121,14 @@ module.exports.changeAvatar = (req, res) => {
   )
     .then((user) => {
       if (user === null) {
-        return res
-          .status(errorUnfound)
-          .send({ message: 'Пользователь по указанному _id не найден.' });
+        next(NotFoundError('Пользовать не найден'))
       }
       return res.status(success).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return res
-          .status(errorCode)
-          .send({
-            message: 'Переданы некорректные данные для обновления аватара',
-          });
-      }
-      return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
+       next(new BadRequestError('Переданы некорректные данные для обновления аватара'))
+      } else next(err);
     });
 };
 
@@ -154,7 +142,6 @@ module.exports.authorize = (req, res, next) => {
     .then((user) =>
       bcrypt.compare(password, user.password).then((matched) => {
       if (matched) {
-        console.log(user, 'at how lucky we are to be alive right now')
         return user;
       } next(NotFoundError('Пользовать не найден')); // ошибка на несовпадение пароля
     }))
@@ -162,7 +149,6 @@ module.exports.authorize = (req, res, next) => {
       // создадим токен
       const jwt = token.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.send({ jwt }); // вернём токен
-      console.log(jwt, 'look at where you are look at where you started')
     })
     .catch(next);
 };

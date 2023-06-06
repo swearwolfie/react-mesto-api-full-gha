@@ -240,6 +240,7 @@ function App() {
       .editProfile(name, about)
       .then((updateInfo) => {
         console.log(updateInfo, "id could turn water into wine");
+        console.log(updateInfo.data.name, updateInfo.data.about, "la la");
         setCurrentUser(updateInfo.data.name, updateInfo.data.about);
         closeAllPopups();
       })
@@ -248,7 +249,7 @@ function App() {
       });
   }
 
-  function handleUpdateAvatar({ avatar }) {
+  function handleUpdateAvatar(avatar) {
     apiThingie
       .changeAvatar(avatar)
       .then((updateInfo) => {

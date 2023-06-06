@@ -38,6 +38,7 @@ function App() {
 
   // проверка токена
 
+  /*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -82,9 +83,9 @@ function App() {
           console.log(error);
         });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn]); */
 
-    /*
+  
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -134,7 +135,7 @@ function App() {
   }, [isLoggedIn]);
 
   // получаем массив карточек и инфу пользователя
-
+/*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {

@@ -82,6 +82,7 @@ module.exports.getUsers = (req, res) => {
 };
 
 module.exports.changeUser = (req, res, next) => {
+  console.log(req.body, 'better than i ever did')
   User.findByIdAndUpdate(
     req.user._id,
     {

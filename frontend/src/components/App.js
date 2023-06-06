@@ -249,9 +249,10 @@ function App() {
       });
   }
 
-  function handleUpdateAvatar(avatar) {
+  function handleUpdateAvatar(data) {
+    console.log(data)
     apiThingie
-      .changeAvatar(avatar)
+      .changeAvatar(data)
       .then((updateInfo) => {
         console.log(updateInfo, "if i could breathe id be free");
         setCurrentUser(updateInfo);

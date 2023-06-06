@@ -240,7 +240,7 @@ function App() {
       .editProfile(name, about)
       .then((updateInfo) => {
         console.log(updateInfo, "id could turn water into wine");
-        setCurrentUser(updateInfo.name, updateInfo.about, updateInfo.avatar);
+        setCurrentUser(updateInfo.name, updateInfo.about);
         closeAllPopups();
       })
       .catch((error) => {

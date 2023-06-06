@@ -109,7 +109,7 @@ module.exports.changeUser = (req, res, next) => {
 };
 
 module.exports.changeAvatar = (req, res, next) => {
-  console.log(req.body, 'im still standing better than i ever did')
+  console.log(req.body, 'im still standing')
   User.findByIdAndUpdate(
     req.user._id,
     {

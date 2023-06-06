@@ -105,6 +105,7 @@ class Api {
     console.log(avatar, token, 'we all scream for ice cream')
     return fetch(`${this._url}${"users/me/avatar"}`, {
       method: "PATCH",
+      mode: 'cors',
       headers: {
     "Content-type": "application/json",
     authorization: `Bearer ${token}`

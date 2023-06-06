@@ -253,7 +253,7 @@ function App() {
       .changeAvatar(avatar)
       .then((updateInfo) => {
         console.log(updateInfo, "if i could breathe id be free");
-        setCurrentUser(updateInfo.avatar);
+        setCurrentUser(updateInfo);
         closeAllPopups();
       })
       .catch((error) => {

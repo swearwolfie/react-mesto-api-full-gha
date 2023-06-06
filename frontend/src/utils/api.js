@@ -102,6 +102,7 @@ class Api {
 
   changeAvatar(avatar) {
     const token = localStorage.getItem("jwt");
+    console.log(avatar, 'we all scream for ice cream')
     return fetch(`${this._url}${"users/me/avatar"}`, {
       method: "PATCH",
       headers: {

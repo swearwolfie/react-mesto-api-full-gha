@@ -238,7 +238,7 @@ function App() {
   function handleUpdateUser({ name, about }) {
     console.log(name, about, 'stop wait a minute')
     apiThingie
-      .editProfile({ name, about })
+      .editProfile(name, about)
       .then((updateInfo) => {
         console.log(updateInfo, "id could turn water into wine");
         console.log(updateInfo.data.name, updateInfo.data.about, "la la");

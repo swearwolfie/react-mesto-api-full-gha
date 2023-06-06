@@ -37,7 +37,7 @@ function App() {
   const navigate = useNavigate();
 
   // проверка токена
-  /*
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -53,8 +53,38 @@ function App() {
           console.log(error);
         });
     }
-  }); */
+  }, []);
 
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      apiThingie
+        .getCards() // result - готовые данные
+        .then((cards) => {
+          setUploadedCards(cards.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      apiThingie
+        .getProfileInfo()
+        .then((profileUserInfo) => {
+          console.log(profileUserInfo, "salut");
+          setCurrentUser(profileUserInfo.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [isLoggedIn]);
+
+    /*
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -104,7 +134,7 @@ function App() {
   }, [isLoggedIn]);
 
   // получаем массив карточек и инфу пользователя
-  /*
+
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {

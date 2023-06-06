@@ -252,7 +252,7 @@ function App() {
   function handleUpdateAvatar(data) {
     console.log(data)
     apiThingie
-      .changeAvatar(data)
+      .changeAvatar(data.avatar)
       .then((updateInfo) => {
         console.log(updateInfo, "if i could breathe id be free");
         setCurrentUser(updateInfo);

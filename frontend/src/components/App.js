@@ -240,7 +240,7 @@ function App() {
       .editProfile(name, about)
       .then((updateInfo) => {
         console.log(updateInfo, "id could turn water into wine");
-        setCurrentUser(updateInfo.name, updateInfo.about);
+        setCurrentUser(updateInfo.name, updateInfo.about, updateInfo.avatar);
         closeAllPopups();
       })
       .catch((error) => {
@@ -253,7 +253,7 @@ function App() {
       .changeAvatar(avatar)
       .then((updateInfo) => {
         console.log(updateInfo, "if i could breathe id be free");
-        setCurrentUser(updateInfo);
+        setCurrentUser(updateInfo.avatar);
         closeAllPopups();
       })
       .catch((error) => {

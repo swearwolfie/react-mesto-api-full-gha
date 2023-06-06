@@ -11,7 +11,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cardSet, o
     <main className="content">
       <section className="profile">
         <img
-          src={currentUser.avatar}
+          src={currentUser.avatar} //currentUser.avatar
           className="profile__photo"
           alt="аватар пользователя"
         />

@@ -64,7 +64,7 @@ class Api {
     }).then(this.checkResponse);
   }
 
-  editProfile(name, about) {
+  editProfile({ name, about }) {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"users/me"}`, {
       method: "PATCH",

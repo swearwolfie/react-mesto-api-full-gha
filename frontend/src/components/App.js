@@ -239,7 +239,7 @@ function App() {
   function handleUpdateUser({ name, about }) {
     console.log(name, about, 'stop wait a minute')
     apiThingie
-      .editProfile(datat)
+      .editProfile(data)
       .then((updateInfo) => {
         console.log(updateInfo.data, "la la");
         setCurrentUser({ name: updateInfo.data.name, about: updateInfo.data.about });

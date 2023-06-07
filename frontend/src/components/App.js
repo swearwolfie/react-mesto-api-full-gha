@@ -242,7 +242,7 @@ function App() {
       .editProfile(profileInfo)
       .then((updateInfo) => {
         console.log(updateInfo, "la la");
-        setCurrentUser({ name: updateInfo.data.name, about: updateInfo.data.about });
+        setCurrentUser(updateInfo.data);
         closeAllPopups();
       })
       .catch((error) => {

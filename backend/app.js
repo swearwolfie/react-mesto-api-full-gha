@@ -65,6 +65,12 @@ app.use(requestLogger); // подключаем логгер запросов (�
 // если в будущем понадобятся файлы фронта из локальных папок
 /* app.use(express.static(path.join(__dirname + '/public'))); */
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),

@@ -109,7 +109,7 @@ class Api {
     "Content-type": "application/json",
     authorization: `Bearer ${token}`
   },
-      body: JSON.stringify({ avatar }),
+      body: JSON.stringify({ avatar: avatar }),
     }).then(this.checkResponse);
   } // `${this._url}${"users/me/avatar"}`
 

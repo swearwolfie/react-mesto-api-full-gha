@@ -64,7 +64,7 @@ class Api {
     }).then(this.checkResponse);
   }
 
-  editProfile({ name, about }) {
+  editProfile(profileInfo) {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._url}${"users/me"}`, {
       method: "PATCH",
@@ -72,10 +72,7 @@ class Api {
     "Content-type": "application/json",
     authorization: `Bearer ${token}`
   },
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      }),
+      body: JSON.stringify(profileInfo),
     }).then(this.checkResponse);
   }
 

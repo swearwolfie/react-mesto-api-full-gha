@@ -236,12 +236,12 @@ function App() {
   {
     /* сначала через вызов апи задаем информацию на сервере, потом задаем ее на самом сайте;  */
   }
-  function handleUpdateUser({ name, about }) {
-    console.log(name, about, 'stop wait a minute')
+  function handleUpdateUser(profileInfo) {
+    console.log(profileInfo 'stop wait a minute')
     apiThingie
-      .editProfile(data)
+      .editProfile(profileInfo)
       .then((updateInfo) => {
-        console.log(updateInfo.data, "la la");
+        console.log(updateInfo, "la la");
         setCurrentUser({ name: updateInfo.data.name, about: updateInfo.data.about });
         closeAllPopups();
       })

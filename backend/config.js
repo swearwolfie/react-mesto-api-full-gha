@@ -1,9 +1,8 @@
-require('dotenv').config()
+require('dotenv').config();
+ const { JWT_SECRET = 'some-secret-key' } = process.env;
+ const { DB_ADDRESS = 'DB_ADDRESS' } = process.env;
 
-const { JWT_SECRET = 'some-secret-key' } = process.env;
-const { DB_ADDRESS = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
-
-module.exports = {
+ module.exports = {
   JWT_SECRET,
   DB_ADDRESS,
-};
+ };

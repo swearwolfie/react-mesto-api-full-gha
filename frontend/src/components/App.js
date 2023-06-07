@@ -239,11 +239,10 @@ function App() {
   function handleUpdateUser({ name, about }) {
     console.log(name, about, 'stop wait a minute')
     apiThingie
-      .editProfile(name, about)
+      .editProfile(datat)
       .then((updateInfo) => {
-        console.log(updateInfo, "id could turn water into wine");
-        console.log(updateInfo.data.name, updateInfo.data.about, "la la");
-        setCurrentUser(updateInfo.data.name, updateInfo.data.about);
+        console.log(updateInfo.data, "la la");
+        setCurrentUser({ name: updateInfo.data.name, about: updateInfo.data.about });
         closeAllPopups();
       })
       .catch((error) => {

@@ -211,7 +211,7 @@ function App() {
     apiThingie
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        console.log(newCard, 'but i love being at your side')
+        console.log(newCard.data, 'but i love being at your side')
         setUploadedCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
         );
@@ -270,7 +270,7 @@ function App() {
       .addNewCard(title, picture)
       .then((newCard) => {
         console.log(newCard, 'im just a sidekick im just a sidekick')
-        setUploadedCards([newCard, ...uploadedCards]);
+        setUploadedCards([newCard.data, ...uploadedCards]);
         closeAllPopups();
       })
       .catch((error) => {

@@ -209,11 +209,11 @@ function App() {
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     apiThingie
-      .changeLikeCardStatus(card._id, !isLiked)
+      .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         console.log(newCard.data, 'but i love being at your side')
         setUploadedCards((state) =>
-          state.map((c) => (console.log(state, 'HEY YOU', c, 'OUT THERE')))  //(c._id === card._id ? newCard.data : c))
+          state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })
       .catch((error) => {

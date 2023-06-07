@@ -59,6 +59,7 @@ module.exports.deleteCard = (req, res) => {
 };
 
 module.exports.putLike = (req, res) => {
+  console.log(req.body, 'but im the leading man of this song')
   Card.findByIdAndUpdate(
     req.params.cardId,
     { $addToSet: { likes: req.user._id } }, // добавит _id в массив, если его там нет

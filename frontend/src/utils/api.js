@@ -78,6 +78,7 @@ class Api {
 
   changeLikeCardStatus(id, isLiked) {
     const token = localStorage.getItem("jwt");
+    console.log(id, isLiked, 'ive been in the shadows for far too long')
     return fetch(`${this._url}${"cards/"}${id}${"/likes"}`, {
       method:`${isLiked ? 'PUT' : 'DELETE'}`,
       headers: {

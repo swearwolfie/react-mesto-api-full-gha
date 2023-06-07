@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs'); // импортируем bcrypt для хэширования паролей
 const token = require('jsonwebtoken'); // импортируем модуль jsonwebtoken для создания токена
 const User = require('../models/user');
-// const { NODE_ENV, JWT_SECRET } = process.env;
 /*
 const { celebrate, Joi } = require('celebrate'); библиотека для валидации данных
 */
@@ -13,7 +12,7 @@ const {
 const NotFoundError = require('../errors/not-found-err');
 const ConflictError = require('../errors/confl-err');
 const BadRequestError = require('../errors/bad-req-err');
-const { JWT_SECRET } = require('../config');
+const { JWT_SECRET, NODE_ENV } = require('../config');
 
 module.exports.createUser = (req, res, next) => {
   const
@@ -149,7 +148,7 @@ module.exports.authorize = (req, res, next) => {
     }))
     .then((user) => {
       // создадим токен
-      const jwt = token.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      const jwt = token.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res.send({ jwt }); // вернём токен
     })
     .catch(next);

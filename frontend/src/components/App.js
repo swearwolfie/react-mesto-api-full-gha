@@ -213,7 +213,7 @@ function App() {
       .then((newCard) => {
         console.log(newCard.data, 'but i love being at your side')
         setUploadedCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard.data : c))
+          state.map((c) => (console.log(state, c)))  //(c._id === card._id ? newCard.data : c))
         );
       })
       .catch((error) => {

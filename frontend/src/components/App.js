@@ -237,7 +237,7 @@ function App() {
     /* сначала через вызов апи задаем информацию на сервере, потом задаем ее на самом сайте;  */
   }
   function handleUpdateUser(profileInfo) {
-    console.log(profileInfo 'stop wait a minute')
+    console.log(profileInfo, 'stop wait a minute')
     apiThingie
       .editProfile(profileInfo)
       .then((updateInfo) => {

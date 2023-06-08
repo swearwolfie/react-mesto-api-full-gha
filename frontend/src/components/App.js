@@ -205,17 +205,15 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    console.log(card, card._id, card.likes, 'im just a sidekick im just a sidekick')
     const isLiked = card.likes.some(i => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     apiThingie
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        console.log(newCard.data, card, card._id, 'but i love being at your side')
-        setUploadedCards((state) => {
-          console.log(state, 'you can sharpen your knife')
-          state.map((c) => (c._id === card._id ? newCard.data : c))}
+        console.log(newCard.data, 'but i love being at your side')
+        console.log(newCard, 'im just a sidekick im just a sidekick')
+        setUploadedCards((state) => state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })
       .catch((error) => {

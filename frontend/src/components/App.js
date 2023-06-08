@@ -210,7 +210,7 @@ function App() {
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     apiThingie
-      .changeLikeCardStatus(card._id, !isLiked)
+      .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         console.log(newCard.data, card, card._id, 'but i love being at your side')
         setUploadedCards((state) =>

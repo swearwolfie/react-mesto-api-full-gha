@@ -213,8 +213,9 @@ function App() {
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         console.log(newCard.data, card, card._id, 'but i love being at your side')
-        setUploadedCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard.data : c))
+        setUploadedCards((state) => {
+          console.log(state, 'you can sharpen your knife')
+          state.map((c) => (c._id === card._id ? newCard.data : c))}
         );
       })
       .catch((error) => {

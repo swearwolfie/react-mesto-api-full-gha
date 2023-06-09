@@ -133,7 +133,6 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsStatusSuccess(false);
         setIsInfoToolOpen(true);
         console.log(error);
       });

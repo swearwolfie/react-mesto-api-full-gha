@@ -143,7 +143,7 @@ function App() {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i === currentUser._id);
     console.log(card.likes, 'help ');
-    console.log(card, 'help ');
+    console.log(card, 'help me');
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     apiThingie

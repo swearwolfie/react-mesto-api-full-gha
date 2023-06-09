@@ -200,7 +200,7 @@ function App() {
     apiThingie
       .addNewCard(title, picture)
       .then((newCard) => {
-        setUploadedCards([newCard.data, ...uploadedCards]);
+        setUploadedCards([...uploadedCards, newCard.data]);
         closeAllPopups();
       })
       .catch((error) => {

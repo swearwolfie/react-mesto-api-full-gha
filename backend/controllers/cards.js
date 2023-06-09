@@ -60,8 +60,8 @@ module.exports.deleteCard = (req, res) => {
     });
 };
 
-/*
-module.exports.putLike = (req, res) => {
+
+module.exports.putLike = (req, res, next) => {
   console.log(req.body, 'but im the leading man of this song')
   Card.findByIdAndUpdate(
     req.params.cardId,
@@ -70,23 +70,20 @@ module.exports.putLike = (req, res) => {
   )
     .then((card) => {
       if (card === null) {
-        return res
-          .status(errorUnfound)
-          .send({ message: 'Карточка по указанному _id не найдена.' });
+        throw new NotFoundError('Карточка по указанному _id не найдена.');
       }
       return res.status(success).send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        return res
-          .status(errorCode)
-          .send({ message: 'Передан некорректный id' });
+        next(new BadRequestError('Передан некорректный id'));
+        return;
       }
-      return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
+      next(err);
     });
 };
 
-module.exports.deleteLike = (req, res) => {
+module.exports.deleteLike = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } }, // уберет _id из массива
@@ -94,51 +91,15 @@ module.exports.deleteLike = (req, res) => {
   )
     .then((card) => {
       if (card === null) {
-        return res
-          .status(errorUnfound)
-          .send({ message: 'Карточка по указанному _id не найдена.' });
+        throw new NotFoundError('Карточка по указанному _id не найдена.');
       }
       return res.status(success).send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        return res
-          .status(errorCode)
-          .send({ message: 'Передан некорректный id' });
+        next(new BadRequestError('Передан некорректный id'));
+        return;
       }
-      return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
-    });
-}; */
-
-module.exports.changeLikeCardStatus = async (req, res, next) => {
-  console.log(req.body, 'but im the leading man of this song')
-  try {
-    let action;
-
-    if (req.method === 'PUT') {
-      action = '$addToSet';
-    }
-
-    if (req.method === 'DELETE') {
-      action = '$pull';
-    }
-
-    const card = await Card.findByIdAndUpdate(
-      req.params.id,
-      { [action]: { likes: req.user._id } },
-      { new: true },
-    );
-
-    if (!card) {
-      throw new NotFoundError('Передан несуществующий _id карточки.');
-    }
-
-    res.send(card);
-  } catch (err) {
-    if (err instanceof mongoose.Error.CastError) {
-      next(new BadRequestError('Переданы некорректные данные для постановки/снятии лайка.'));
-    } else {
       next(err);
-    }
-  }
+    });
 };

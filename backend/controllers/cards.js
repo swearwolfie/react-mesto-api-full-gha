@@ -8,6 +8,8 @@ const {
   success,
 } = require('../utils/constants');
 // code - 400, default - 500, unfound - 404, forbidden - 403
+const NotFoundError = require('../errors/not-found-err');
+const BadRequestError = require('../errors/bad-req-err');
 
 module.exports.createCard = (req, res) => {
   const { name, link } = req.body;
@@ -58,7 +60,8 @@ module.exports.deleteCard = (req, res) => {
     });
 };
 
-module.exports.changeLikeCardStatus = (req, res) => {
+/*
+module.exports.putLike = (req, res) => {
   console.log(req.body, 'but im the leading man of this song')
   Card.findByIdAndUpdate(
     req.params.cardId,
@@ -105,4 +108,37 @@ module.exports.deleteLike = (req, res) => {
       }
       return res.status(errorDefault).send({ message: 'На сервере произошла ошибка' });
     });
+}; */
+
+module.exports.changeLikeCardStatus = async (req, res, next) => {
+  console.log(req.body, 'but im the leading man of this song')
+  try {
+    let action;
+
+    if (req.method === 'PUT') {
+      action = '$addToSet';
+    }
+
+    if (req.method === 'DELETE') {
+      action = '$pull';
+    }
+
+    const card = await Card.findByIdAndUpdate(
+      req.params.id,
+      { [action]: { likes: req.user._id } },
+      { new: true },
+    );
+
+    if (!card) {
+      throw new NotFoundError('Передан несуществующий _id карточки.');
+    }
+
+    res.send(card);
+  } catch (err) {
+    if (err instanceof mongoose.Error.CastError) {
+      next(new BadRequestError('Переданы некорректные данные для постановки/снятии лайка.'));
+    } else {
+      next(err);
+    }
+  }
 };

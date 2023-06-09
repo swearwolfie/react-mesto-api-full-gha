@@ -141,7 +141,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
     console.log(card.likes, 'help ');
     console.log(card, 'help me');
 
@@ -178,7 +178,6 @@ function App() {
     apiThingie
       .editProfile(profileInfo)
       .then((updateInfo) => {
-        console.log(updateInfo, "la la");
         setCurrentUser(updateInfo.data);
         closeAllPopups();
       })
@@ -192,7 +191,6 @@ function App() {
     apiThingie
       .changeAvatar(data.avatar)
       .then((updateInfo) => {
-        console.log(updateInfo.data, "if i could breathe id be free");
         setCurrentUser(updateInfo.data);
         closeAllPopups();
       })

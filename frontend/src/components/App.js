@@ -36,55 +36,6 @@ function App() {
 
   const navigate = useNavigate();
 
-  // проверка токена
-
-  /*
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkToken(jwt)
-        .then((data) => {
-          if (data) {
-            setIsLoggedIn(true);
-            setProfileEmail(data.data.email);
-            navigate("/");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      apiThingie
-        .getCards() // result - готовые данные
-        .then((cards) => {
-          setUploadedCards(cards.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      apiThingie
-        .getProfileInfo()
-        .then((profileUserInfo) => {
-          console.log(profileUserInfo, "salut");
-          setCurrentUser(profileUserInfo.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [isLoggedIn]); */
-
   const jwt = localStorage.getItem("jwt");
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
@@ -133,21 +84,6 @@ function App() {
       })
     }
   }, [isLoggedIn]);
-
-  // получаем массив карточек и инфу пользователя
-/*
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-    Promise.all([apiThingie.getProfileInfo(), apiThingie.getCards()])
-      .then(([user, cards]) => {
-        console.log(user, cards, 'i dont pretend to know the challenges were facing')
-        setCurrentUser(user);
-        setUploadedCards(cards);
-      })
-      .catch((err) => console.log(err));
-    }
-  }, [isLoggedIn]); */
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -211,8 +147,6 @@ function App() {
     apiThingie
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        console.log(newCard.data, 'but i love being at your side')
-        console.log(newCard, 'im just a sidekick im just a sidekick')
         setUploadedCards((state) => state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })

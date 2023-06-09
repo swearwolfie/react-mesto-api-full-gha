@@ -87,16 +87,6 @@ class Api {
   },
     }).then(this.checkResponse);
   }
-/*
-  putLike(id) {
-    return fetch(`${this._url}${"cards/"}${id}${"/likes"}`, {
-      method: "PUT",
-      headers: {
-    "Content-type": "application/json",
-    authorization: `Bearer ${token}`
-  },
-    }).then(this.checkResponse);
-  } */
 
   changeAvatar(avatar) {
     const token = localStorage.getItem("jwt");

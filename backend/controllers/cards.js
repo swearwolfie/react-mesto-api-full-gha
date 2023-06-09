@@ -58,7 +58,7 @@ module.exports.deleteCard = (req, res) => {
     });
 };
 
-module.exports.putLike = (req, res) => {
+module.exports.changeLikeCardStatus = (req, res) => {
   console.log(req.body, 'but im the leading man of this song')
   Card.findByIdAndUpdate(
     req.params.cardId,

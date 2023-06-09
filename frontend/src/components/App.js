@@ -141,7 +141,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     console.log(card.likes, 'help ');
     console.log(card, 'help me');
 
@@ -149,6 +149,7 @@ function App() {
     apiThingie
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
+        console.log(newCard, 'om not scared of the dark')
         setUploadedCards((state) => state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })

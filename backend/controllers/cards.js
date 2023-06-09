@@ -84,6 +84,7 @@ module.exports.putLike = (req, res, next) => {
 };
 
 module.exports.deleteLike = (req, res, next) => {
+  console.log('nothing can shake me now')
   Card.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } }, // уберет _id из массива

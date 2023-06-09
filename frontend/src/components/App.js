@@ -133,7 +133,7 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsInfoToolOpen(true);
+        setIsInfoToolOpen({ isOpen: true, sStatusSuccess: false });
         console.log(error);
       });
   }

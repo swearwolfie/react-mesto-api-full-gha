@@ -138,9 +138,7 @@ function App() {
        // setIsInfoToolOpen(true);
         console.log(error);
       }).finally(() => {
-        if (setIsStatusSuccess(false)) {
-          setIsInfoToolOpen(true)
-        } return
+        setIsInfoToolOpen(true);
       });;
   }
 

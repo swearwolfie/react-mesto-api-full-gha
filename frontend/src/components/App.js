@@ -139,10 +139,10 @@ function App() {
         if (data) {
           setProfileEmail(email);
           localStorage.setItem("jwt", data.jwt);
-        /*  setIsStatusSuccess(true);
+          setIsStatusSuccess(true);
           setPopupMessageStatus({
             text: "Вы успешно вошли",
-          }); */
+          });
           setIsLoggedIn(true);
           navigate("/");
         } else { 

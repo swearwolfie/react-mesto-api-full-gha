@@ -114,20 +114,24 @@ function App() {
     register(email, password)
       .then((data) => {
         if (data) {
-          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
           setPopupMessageStatus({
             text: "Вы успешно зарегистрировались!",
           });
+          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
           navigate("/signin");
         }
       })
       .catch((error) => {
         console.log(error);
+        setIsStatusSuccess(false);
         setPopupMessageStatus({
           text: "Что-то пошло не так! Попробуйте ещё раз.",
         });
       })
-      .finally(() => setIsInfoToolOpen(true)); // открываем один из попапов в зависимости от успехов
+      .finally(() => { 
+        setIsInfoToolOpen(true);
+        setIsStatusSuccess(false); 
+      }); // открываем один из попапов в зависимости от успехов
   }
 
   function handleSignIn({ email, password }) {
@@ -151,7 +155,10 @@ function App() {
         text: "Что-то пошло не так! Попробуйте ещё раз.",
       });
         console.log(error);
-      }).finally(() => setIsInfoToolOpen(true));;
+      }).finally(() => { 
+        setIsInfoToolOpen(true);
+        setIsStatusSuccess(false); 
+      });;
   }
 
   function handleCardLike(card) {

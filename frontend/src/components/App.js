@@ -128,7 +128,7 @@ function App() {
           console.log(data, email, "успех апи");
           setProfileEmail(email);
           localStorage.setItem("jwt", data.jwt);
-          setIsInfoToolOpen(true);
+          setIsStatusSuccess(true)
           setIsLoggedIn(true);
           navigate("/");
         }
@@ -137,7 +137,11 @@ function App() {
        // setIsStatusSuccess(false);
        // setIsInfoToolOpen(true);
         console.log(error);
-      }).finally(() => setIsInfoToolOpen(true));;
+      }).finally(() => {
+        if (setIsStatusSuccess(false)) {
+          setIsInfoToolOpen(true)
+        } return
+      });;
   }
 
   function handleCardLike(card) {

@@ -140,23 +140,25 @@ function App() {
           console.log(data, email, "успех апи");
           setProfileEmail(email);
           localStorage.setItem("jwt", data.jwt);
-        /*   setIsStatusSuccess(true);
-         setPopupMessageStatus({
+          setIsStatusSuccess(true);
+          setPopupMessageStatus({
             text: "Вы успешно вошли",
-          }); */
+          });
           setIsLoggedIn(true);
           navigate("/");
-        }
+        } else { 
+          setIsStatusSuccess(false);
+          setPopupMessageStatus({
+            text: "Что-то пошло не так! Попробуйте ещё раз.",
+          });
+        }; 
       })
       .catch((error) => {
-    /*  setIsStatusSuccess(false)
-       setPopupMessageStatus({
-        text: "Что-то пошло не так! Попробуйте ещё раз.",
-      }); */
         console.log(error);
-      }) //.finally(() => { 
-      //  setIsInfoToolOpen(true);; 
-     // });;
+      })
+      .finally(() => { 
+        setIsInfoToolOpen(true);; 
+     });
   }
 
   function handleCardLike(card) {

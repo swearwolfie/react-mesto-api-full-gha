@@ -128,6 +128,7 @@ function App() {
           console.log(data, email, "успех апи");
           setProfileEmail(email);
           localStorage.setItem("jwt", data.jwt);
+          setIsInfoToolOpen(true);
           setIsLoggedIn(true);
           navigate("/");
         }

@@ -33,6 +33,9 @@ function App() {
   const [isStatusSuccess, setIsStatusSuccess] = useState(false);
   const [isInfoToolOpen, setIsInfoToolOpen] = useState(false);
   const [profileEmail, setProfileEmail] = useState("");
+  const [popupMessageStatus, setPopupMessageStatus] = useState({
+    message: "",
+  });
 
   const navigate = useNavigate();
 
@@ -112,11 +115,17 @@ function App() {
       .then((data) => {
         if (data) {
           setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
+          setPopupMessageStatus({
+            text: "Вы успешно зарегистрировались!",
+          });
           navigate("/signin");
         }
       })
       .catch((error) => {
         console.log(error);
+        setPopupMessageStatus({
+          text: "Что-то пошло не так! Попробуйте ещё раз.",
+        });
       })
       .finally(() => setIsInfoToolOpen(true)); // открываем один из попапов в зависимости от успехов
   }
@@ -128,18 +137,21 @@ function App() {
           console.log(data, email, "успех апи");
           setProfileEmail(email);
           localStorage.setItem("jwt", data.jwt);
-          setIsStatusSuccess(true)
+          setIsStatusSuccess(true);
+          setPopupMessageStatus({
+            text: "Вы успешно вошли",
+          });
           setIsLoggedIn(true);
           navigate("/");
         }
       })
       .catch((error) => {
-       // setIsStatusSuccess(false);
-       // setIsInfoToolOpen(true);
+       setIsStatusSuccess(false);
+       setPopupMessageStatus({
+        text: "Что-то пошло не так! Попробуйте ещё раз.",
+      });
         console.log(error);
-      }).finally(() => {
-        setIsInfoToolOpen(true);
-      });;
+      }).finally(() => setIsInfoToolOpen(true));;
   }
 
   function handleCardLike(card) {
@@ -262,6 +274,7 @@ function App() {
           isOpen={isInfoToolOpen}
           onClose={closeAllPopups}
           isSuccess={isStatusSuccess}
+          message={popupMessageStatus}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}

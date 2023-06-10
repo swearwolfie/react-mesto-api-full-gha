@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./InfoTooltip.css";
 import "../index.css";
 
-function InfoTooltip({ isOpen, onClose, isSuccess }) {
+function InfoTooltip({ isOpen, onClose, isSuccess, message }) {
   return (
     <div className={`info-tool ${isOpen ? "info-tool_opened" : ""}`}>
       <div className="info-tool__container">
@@ -12,10 +12,7 @@ function InfoTooltip({ isOpen, onClose, isSuccess }) {
             isSuccess ? "info-tool__button_tick" : "info-tool__button_cross"
           }`}
         ></div>
-        <h3 className="info-tool__title">
-        {isSuccess
-            ? "Вы успешно зарегистрировались!"
-            : "Что-то пошло не так! Попробуйте еще раз."}
+        <h3 className="info-tool__title">{message.text}
         </h3>
       </div>
     </div>
@@ -23,3 +20,13 @@ function InfoTooltip({ isOpen, onClose, isSuccess }) {
 }
 
 export default InfoTooltip;
+
+
+// "Вы успешно зарегистрировались!"
+// "Что-то пошло не так! Попробуйте еще раз."
+
+/*
+{isSuccess
+            ? "Вы успешно зарегистрировались!"
+            : "Что-то пошло не так! Попробуйте еще раз."}
+*/

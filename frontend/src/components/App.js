@@ -112,24 +112,25 @@ function App() {
   function handleSignUp({ email, password }) {
     register(email, password)
       .then((data) => {
-        setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
         if (data) {
+          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
           setPopupMessageStatus({
             text: "Вы успешно зарегистрировались!",
           });
           navigate("/signin");
-        } setIsStatusSuccess(false); 
+        } else { 
+          setIsStatusSuccess(false);
+          setPopupMessageStatus({
+            text: "Что-то пошло не так! Попробуйте ещё раз.",
+          });
+        }; 
       })
       .catch((error) => {
         console.log(error);
-        setPopupMessageStatus({
-          text: "Что-то пошло не так! Попробуйте ещё раз.",
-        });
       })
       .finally(() => { 
-        setIsInfoToolOpen(true);
-      //  setIsStatusSuccess(false); 
-      }); // открываем один из попапов в зависимости от успехов
+        setIsInfoToolOpen(true); // открываем один из попапов в зависимости от успехов
+      }); 
   }
 
   function handleSignIn({ email, password }) {

@@ -51,7 +51,6 @@ function App() {
           apiThingie
           .getProfileInfo()
           .then((profileUserInfo) => {
-            console.log(profileUserInfo, "salut");
             setCurrentUser(profileUserInfo.data);
           })
           .catch((error) => {
@@ -113,17 +112,16 @@ function App() {
   function handleSignUp({ email, password }) {
     register(email, password)
       .then((data) => {
+        setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
         if (data) {
-          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
           setPopupMessageStatus({
             text: "Вы успешно зарегистрировались!",
           });
           navigate("/signin");
-        }
+        } setIsStatusSuccess(false); 
       })
       .catch((error) => {
         console.log(error);
-        setIsStatusSuccess(false);
         setPopupMessageStatus({
           text: "Что-то пошло не так! Попробуйте ещё раз.",
         });
@@ -141,23 +139,23 @@ function App() {
           console.log(data, email, "успех апи");
           setProfileEmail(email);
           localStorage.setItem("jwt", data.jwt);
-          setIsStatusSuccess(true);
-          setPopupMessageStatus({
+        /*   setIsStatusSuccess(true);
+         setPopupMessageStatus({
             text: "Вы успешно вошли",
-          });
+          }); */
           setIsLoggedIn(true);
           navigate("/");
         }
       })
       .catch((error) => {
-      setIsStatusSuccess(false)
+    /*  setIsStatusSuccess(false)
        setPopupMessageStatus({
         text: "Что-то пошло не так! Попробуйте ещё раз.",
-      });
+      }); */
         console.log(error);
-      }).finally(() => { 
-        setIsInfoToolOpen(true);; 
-      });;
+      }) //.finally(() => { 
+      //  setIsInfoToolOpen(true);; 
+     // });;
   }
 
   function handleCardLike(card) {

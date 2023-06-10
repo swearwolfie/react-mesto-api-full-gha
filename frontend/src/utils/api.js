@@ -55,7 +55,6 @@ class Api {
 
   getProfileInfo() {
     const token = localStorage.getItem("jwt");
-    console.log(token, 'the falling of your feet')
     return fetch(`${this._url}${"users/me"}`, {
       headers: {
     "Content-type": "application/json",

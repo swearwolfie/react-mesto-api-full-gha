@@ -150,13 +150,13 @@ function App() {
         }
       })
       .catch((error) => {
+      setIsStatusSuccess(false)
        setPopupMessageStatus({
         text: "Что-то пошло не так! Попробуйте ещё раз.",
       });
         console.log(error);
       }).finally(() => { 
-        setIsInfoToolOpen(true);
-        setIsStatusSuccess(false); 
+        setIsInfoToolOpen(true);; 
       });;
   }
 

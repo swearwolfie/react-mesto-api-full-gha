@@ -137,13 +137,12 @@ function App() {
     authorize(email, password)
       .then((data) => {
         if (data) {
-          console.log(data, email, "успех апи");
           setProfileEmail(email);
           localStorage.setItem("jwt", data.jwt);
-          setIsStatusSuccess(true);
+        /*  setIsStatusSuccess(true);
           setPopupMessageStatus({
             text: "Вы успешно вошли",
-          });
+          }); */
           setIsLoggedIn(true);
           navigate("/");
         } else { 

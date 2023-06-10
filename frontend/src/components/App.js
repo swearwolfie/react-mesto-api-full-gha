@@ -133,9 +133,10 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsInfoToolOpen({ isOpen: true });
+       // setIsStatusSuccess(false);
+       // setIsInfoToolOpen(true);
         console.log(error);
-      });
+      }).finally(() => setIsInfoToolOpen(true));;
   }
 
   function handleCardLike(card) {

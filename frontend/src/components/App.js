@@ -114,10 +114,10 @@ function App() {
     register(email, password)
       .then((data) => {
         if (data) {
+          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
           setPopupMessageStatus({
             text: "Вы успешно зарегистрировались!",
           });
-          setIsStatusSuccess(true); // если статус ок, выбираем картинку с галочкой
           navigate("/signin");
         }
       })
@@ -130,7 +130,7 @@ function App() {
       })
       .finally(() => { 
         setIsInfoToolOpen(true);
-        setIsStatusSuccess(false); 
+      //  setIsStatusSuccess(false); 
       }); // открываем один из попапов в зависимости от успехов
   }
 
@@ -150,7 +150,6 @@ function App() {
         }
       })
       .catch((error) => {
-       setIsStatusSuccess(false);
        setPopupMessageStatus({
         text: "Что-то пошло не так! Попробуйте ещё раз.",
       });

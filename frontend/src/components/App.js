@@ -168,7 +168,6 @@ function App() {
     apiThingie
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        console.log(newCard, 'om not scared of the dark')
         setUploadedCards((state) => state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })
